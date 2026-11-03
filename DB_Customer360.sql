@@ -70,3 +70,21 @@ INSERT INTO Tabla_Interacciones (email_usuario, fecha_interaccion, plataforma) V
 ('carlos.mendoza@email.com ', '2026-09-01 14:30:00', 'App Móvil'),
 ('ANA.TORRES@EMAIL.COM', '2026-09-02 09:15:00', 'Sitio Web');
 GO
+
+
+-- VISTA: 
+CREATE VIEW vw_Clientes_Ventas AS
+SELECT
+    C.cliente_id,
+    LTRIM(RTRIM(C.nombre)) AS nombre_completo,
+    C.email,
+    C.ciudad,
+    V.venta_id,
+    V.monto_venta,
+    V.fecha_venta
+FROM Tabla_Clientes AS C
+INNER JOIN Tabla_Ventas AS V
+    ON C.cliente_id = V.cliente_id;
+GO
+
+SELECT * FROM vw_Clientes_Ventas;
